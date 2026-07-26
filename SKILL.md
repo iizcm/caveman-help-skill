@@ -1,47 +1,63 @@
 ---
 name: caveman-help
-description: "Quick-reference card for all caveman modes, skills, and commands.
-One-shot display, not a persistent mode. Trigger: /caveman-help,
-"caveman help", "what caveman commands", "how do I use caveman"."
-version: 1.0.0
-author: Community
-license: MIT
-platforms: [linux, macos, windows]
-tags: [general]
+description: >
+  Quick-reference card for all caveman modes, skills, and commands.
+  One-shot display, not a persistent mode. Trigger: /caveman-help,
+  "caveman help", "what caveman commands", "how do I use caveman".
 ---
 
-# Caveman Help — Skill
+# Caveman Help
 
-Quick-reference card for all caveman modes, skills, and commands.
-One-shot display, not a persistent mode. Trigger: /caveman-help,
-"caveman help", "what caveman commands", "how do I use caveman".
+Display this reference card when invoked. One-shot — do NOT change mode, write flag files, or persist anything. Output in caveman style.
 
-## Install
+## Modes
 
+| Mode | Trigger | What change |
+|------|---------|-------------|
+| **Lite** | `/caveman lite` | Drop filler. Keep sentence structure. |
+| **Full** | `/caveman` | Drop articles, filler, pleasantries, hedging. Fragments OK. Default. |
+| **Ultra** | `/caveman ultra` | Extreme compression. Bare fragments. Tables over prose. |
+| **Wenyan-Lite** | `/caveman wenyan-lite` | Classical Chinese style, light compression. |
+| **Wenyan-Full** | `/caveman wenyan` | Full 文言文. Maximum classical terseness. |
+| **Wenyan-Ultra** | `/caveman wenyan-ultra` | Extreme. Ancient scholar on a budget. |
+
+Mode stick until changed or session end.
+
+## Skills
+
+| Skill | Trigger | What it do |
+|-------|---------|-----------|
+| **caveman-commit** | `/caveman-commit` | Terse commit messages. Conventional Commits. ≤50 char subject. |
+| **caveman-review** | `/caveman-review` | One-line PR comments: `L42: bug: user null. Add guard.` |
+| **caveman-compress** | `/caveman-compress <file>` | Compress .md files to caveman prose. Saves ~46% input tokens. |
+| **caveman-help** | `/caveman-help` | This card. |
+
+## Deactivate
+
+Say "stop caveman" or "normal mode". Resume anytime with `/caveman`.
+
+## Language
+
+Keep user's language by default. User write Portuguese → reply Portuguese caveman. Compress the style, not the language. Technical terms, code, commands, commit types, and exact error strings stay verbatim unless user ask for translation.
+
+## Configure Default Mode
+
+Default mode = `full`. Change it:
+
+**Environment variable** (highest priority):
 ```bash
-cp -r <skill-name> ~/.hermes/skills/<skill-path>/
+export CAVEMAN_DEFAULT_MODE=ultra
 ```
 
-Or clone this repository:
-
-```bash
-git clone https://github.com/iizcm/caveman-help-skill.git ~/.hermes/skills/<skill-path>/
+**Config file** (`~/.config/caveman/config.json`):
+```json
+{ "defaultMode": "lite" }
 ```
 
-## Usage
+Set `"off"` to disable auto-activation on session start. User can still activate manually with `/caveman`.
 
-Invoke your AI agent with a clear instruction matching this skill's purpose. The agent will route tasks to this skill when the instruction matches its description or trigger keywords.
+Resolution: env var > config file > `full`.
 
-Refer to `README.md` in this repository for:
-- Detailed step-by-step installation guide
-- Bilingual documentation (English + Indonesian)
-- Troubleshooting table
-- Security best practices
-- Customization tips
+## More
 
-## Safety rules
-
-- Never commit private keys, seed phrases, API tokens, or personal data to version control
-- Use placeholders (`<YOUR_...>`) in all examples and code snippets
-- Validate all outputs before acting on them
-- Keep real credentials in your runtime's secure credential store only
+Full docs: https://github.com/JuliusBrussee/caveman
